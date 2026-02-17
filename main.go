@@ -12,6 +12,7 @@ import (
 )
 
 func main() {
+	//rot gita ebal
 	app := &cli.App{
 		Name:  "NiceApp",
 		Usage: "ToDoSomeWork",
