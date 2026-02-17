@@ -12,7 +12,7 @@ import (
 )
 
 func main() {
-	//rot gita ebal
+	//rot gita ebal 123
 	app := &cli.App{
 		Name:  "NiceApp",
 		Usage: "ToDoSomeWork",
