@@ -2,6 +2,7 @@ package service
 
 import (
 	"bufio"
+	"log/slog"
 	"os"
 )
 
@@ -17,7 +18,11 @@ func (prod fileprod) Produce() ([]string, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer file.Close()
+	defer func() {
+		if err := file.Close(); err !=nil {
+			slog.Error("Ошибка закрытия файла", "Error", err)
+		}
+	}()
 	scanner := bufio.NewScanner(file)
 	var lines []string
 	for scanner.Scan() {

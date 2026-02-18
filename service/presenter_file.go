@@ -1,6 +1,8 @@
 package service
 
 import (
+	"fmt"
+	"log/slog"
 	"os"
 )
 
@@ -16,9 +18,15 @@ func (pres filepresent) Present(lines []string) error {
 	if err != nil {
 		return err
 	}
-	defer file.Close()
+	defer func() {
+		if err := file.Close(); err != nil {
+			slog.Error("Ошибка закрытия файла", "Error", err)
+		}
+	}()
 	for _, line := range lines {
-		file.WriteString(line + "\n")
+		if _, err := file.WriteString(line + "\n"); err != nil {
+			return fmt.Errorf("failed to write to file: %w", err)
+		}
 	}
 	return nil
 }

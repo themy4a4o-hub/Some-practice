@@ -10,7 +10,6 @@ func (m *Service) MakeMaskGreatAgain(s string) string {
 	isMatch := true
 	for i := 0; i < len(input); i++ {
 		if i+len(target) <= len(input) { //цикл на проверку соответствия количеству байтов
-			isMatch = true
 			for k := 0; k < len(target); k++ { //проверка на соответствие таргету (http://)
 				if input[i+k] != target[k] {
 					isMatch = false //если не соответствует,то false
