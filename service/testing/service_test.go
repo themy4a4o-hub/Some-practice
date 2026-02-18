@@ -1,8 +1,9 @@
 package service_test
 
 import (
-	"pract/service"
+	"context"
 	"errors"
+	"pract/service"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -20,8 +21,8 @@ func TestService_Run(t *testing.T) {
 		Prod: Produser,
 		Pres: Presenter,
 	}
-
-	err := srv.Run()
+	ctx := context.Context(context.Background())
+	err := srv.Run(ctx)
 
 	assert.NoError(t, err)
 	Produser.AssertExpectations(t)
@@ -38,7 +39,8 @@ func TestService_Run_ProduserError(t *testing.T) {
 		Prod: Produser,
 		Pres: Presenter,
 	}
-	err := srv.Run()
+	ctx := context.Context(context.Background())
+	err := srv.Run(ctx)
 	assert.Error(t, err)
 	assert.Equal(t, expectedErr, err)
 	Produser.AssertExpectations(t)
@@ -55,7 +57,8 @@ func TestService_Run_PresenterError(t *testing.T) {
 		Prod: Produser,
 		Pres: Presenter,
 	}
-	err := srv.Run()
+	ctx := context.Context(context.Background())
+	err := srv.Run(ctx)
 	assert.Error(t, err)
 	assert.Equal(t, expectedErr, err)
 
